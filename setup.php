@@ -82,8 +82,6 @@ function getLoginScript($host, $user, $password) {
 		<?php 
 		include 'includes/error-handler.php';
 		
-		// print msg
-
 		if (isset($_POST['submit']) && $_POST['submit'] === "Verzenden") {
 			// get form data
 			if ($dbUsername != "" && $dbPassword != "") {
@@ -108,6 +106,7 @@ function getLoginScript($host, $user, $password) {
 						$countTables = mysqli_query($link, getQueryCountTables());
 						if (mysqli_num_rows($countTables) === 2) {
 							$dataSubmitted = !$dataSubmitted;
+							$successMsg = "Verbonden met " . mysqli_get_host_info($link);
 						} else {
 							trigger_error("Er ging iets mis met het aanmaken van de database en tabellen");
 						}
@@ -119,6 +118,7 @@ function getLoginScript($host, $user, $password) {
 				$msg = "Vul je gebruikersnaam en wachtwoord in.";
 			}
 		} else if (isset($_POST['submit']) && $_POST['submit'] === "Verwijder dit bestand") {
+			// delete and redirect
 			unlink("setup.php");
 			header("Location: index.php");
 		}
@@ -126,7 +126,9 @@ function getLoginScript($host, $user, $password) {
 		
 		<?php if (!$dataSubmitted) { ?>
 			<p><strong>Vul hier je MySQL inloggegevens in</strong></p>
-			<?php if ($msg) print "<p class='red'>" . $msg . "</p>" ?>
+			<?php if ($msg) { ?>
+				<p class="red"><?= $msg; ?></p>
+			<?php } ?>
 			<form action="setup.php" method="post" class="form">
 				<table>
 					<tr>
@@ -149,7 +151,12 @@ function getLoginScript($host, $user, $password) {
 			</form>
 			<p>*) Het wachtwoord wordt onbeschermd opgeslagen in de broncode!</p>
 		<?php } else { ?>
-			<?php if ($msg) print "<p class='red'>" . $msg . "</p>" ?>
+			<?php if ($msg) { ?>
+				<p class="red"><?= $msg ?></p>
+			<?php } ?>
+			<?php if ($successMsg) { ?>
+				<p><span class="green-status"><?= $successMsg ?></span></p>
+			<?php } ?>
 			<p>Installatie gereed. Wil je het installatiebestand verwijderen?</p>
 			<form action="setup.php" method="post" class="form">
 				<input type="submit" name="submit" class="inline-button special-btn" value="Verwijder dit bestand">

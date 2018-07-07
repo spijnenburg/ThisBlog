@@ -1,7 +1,7 @@
 
 	<?php
 	$host = 'localhost';
-	$user = 'myusername';
+	$user = 'myname';
 	$password = 'mypassword';
 	$database = 'thisblog';
 	

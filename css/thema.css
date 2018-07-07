@@ -175,6 +175,12 @@ a:hover {
 .red a:hover{
 	color: #c50000;
 }
+.green-status {
+	color: #fff;
+	font-weight: 600;
+	padding: 5px 10px;
+	background-color: rgb(10, 133, 10);
+}
 .errorhandler {
 	background-color: #900d0d;
 	color: white;

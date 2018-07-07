@@ -1,13 +1,13 @@
 <?php
 // vars
-$dbURL = (isset($_POST['db-url']) && $_POST['db-url'] != "") ? $_POST['db-url'] : "localhost";
-$dbUsername = (isset($_POST['db-username'])) ? $_POST['db-username'] : null;
-$dbPassword = (isset($_POST['db-password'])) ? $_POST['db-password'] : null;
-$dataSubmitted = false;
-$msg = null;
-$data = null;
-$dbExists = null;
-$countTables = 0;
+$dbURL 			= (isset($_POST['db-url']) && $_POST['db-url'] != "") ? $_POST['db-url'] : "localhost";
+$dbUsername 	= (isset($_POST['db-username'])) ? $_POST['db-username'] : null;
+$dbPassword 	= (isset($_POST['db-password'])) ? $_POST['db-password'] : null;
+$dataSubmitted 	= false;
+$msg 			= null;
+$data 			= null;
+$dbExists 		= null;
+$countTables 	= 0;
 
 // functions
 function getQueryUsers() {
@@ -118,7 +118,10 @@ function getLoginScript($host, $user, $password) {
 			} else {
 				$msg = "Vul je gebruikersnaam en wachtwoord in.";
 			}
-		} 
+		} else if (isset($_POST['submit']) && $_POST['submit'] === "Verwijder dit bestand") {
+			unlink("setup.php");
+			header("Location: index.php");
+		}
 		?>
 		
 		<?php if (!$dataSubmitted) { ?>

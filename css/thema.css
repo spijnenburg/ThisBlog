@@ -195,3 +195,10 @@ a:hover {
 label, .indent {
 	margin-left: 0.5em;
 }
+.special-btn {
+	width: 150px;
+	background-color: rgb(139, 0, 0);
+}
+.special-btn:hover {
+	background-color: rgb(202, 0, 0);
+}
